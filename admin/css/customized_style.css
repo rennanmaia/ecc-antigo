@@ -1,0 +1,21 @@
+.hidden{
+  display: none;
+}
+
+.centered-message {
+  margin-left: 10%;
+  margin-right: 10%;
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.color-checked {
+  margin-left: 5px;
+  color: green;
+}
+
+.color-unchecked {
+  margin-left: 5px;
+  color: red;
+}

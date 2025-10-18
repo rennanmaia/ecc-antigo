@@ -1,0 +1,143 @@
+* {
+  -webkit-print-color-adjust: exact !important;   /* Chrome, Safari, Edge */
+  color-adjust: exact !important;                 /*Firefox*/
+}
+
+html { font-size: 12pt; }
+
+.folha { 
+  /* background-color: #ccc;  */
+  /* padding: 0.5em;  */
+}
+
+.a4_vertical { 
+  /* width: 793px; 
+  height: 1122px;  */
+  width: 21.5cm; 
+  height: 29.2cm; 
+}
+
+.a4_horizontal { 
+  width: 23cm; 
+  height: 29.6cm; 
+}
+
+.cracha-mesa {
+  /* width: 9.2cm; */
+  width: 45%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.secao-cracha {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.cracha-mesa-ladoa {
+  /* width: 10cm; // São Francisco */
+  width: 9.2cm;
+  /* height: 7cm; // São Francisco */
+  height: 5.5cm;
+  /* float: left; */
+  margin-bottom: 10px;
+  /* margin-right: 10px; */
+  /* background-image: url('../img/cracha-v4.png'); */
+  background-image: url('../img/cracha-fatima22.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-origin: content-box;
+  padding: 5px;
+  margin-right: 5px;  
+}
+
+.cracha {
+  /* width: 10cm; // São Francisco */
+  /* width: 9.2cm; */
+  /* height: 7cm; // São Francisco */
+  /* height: 5.5cm; */
+  width: 10cm;
+  height: 7cm;
+  float: left;
+  margin-bottom: 10px;
+  /* margin-right: 10px; */
+  /* background-image: url('../img/cracha-v4.png'); */
+  background-image: url('../img/cracha-fatima22.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-origin: content-box;
+  padding: 5px;
+  margin-right: 5px;
+}
+
+.quebra-pagina {
+  display: block;
+  page-break-before: always;
+}
+
+.borda {
+  border: 1px solid #000000;
+}
+
+.borda-cracha {
+  border-style: double;
+  border-width: 5px;
+  border-color: green;
+}
+
+.cracha-nomes {
+  /* margin-left: 30px;
+  margin-right: 30px; */
+  margin-top: 30%;
+  border-radius: 10px;
+  padding: 10px;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cracha-nome-grande {
+  font-size: 22pt;
+  font-weight: bold;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: center;
+}
+
+.cracha-nome-grande p {
+  width: 100%;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.cracha-nome-pequeno {
+  font-size: 14pt;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: center;
+}
+
+.cracha-nome-pequeno p {
+  width: 100%;
+  /* text-align: rights; */
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.cor-do-circulo {
+  margin-top: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  height: 14px;
+}
+
+.invertido {
+  transform: rotate(180deg); /* Equal to rotateZ(45deg) */
+}

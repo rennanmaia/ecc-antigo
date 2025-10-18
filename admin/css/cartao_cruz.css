@@ -1,0 +1,114 @@
+* {
+  -webkit-print-color-adjust: exact !important;   /* Chrome, Safari, Edge */
+  color-adjust: exact !important;                 /*Firefox*/
+}
+
+html { font-size: 12pt; }
+
+.folha { 
+  /* background-color: #ccc;  */
+  /* padding: 0.5em;  */
+}
+
+.a4_vertical { 
+  /* width: 793px; 
+  height: 1122px;  */
+  width: 21.5cm; 
+  height: 29.2cm; 
+}
+
+.a4_horizontal { 
+  width: 23cm; 
+  height: 29.6cm; 
+}
+
+.cartao {
+  width: 22cm;
+  height: 14cm;
+  float: left;
+  margin-bottom: 30px;
+  /* margin-right: 10px; */
+  background-image: url('../img/cartao_cruz.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-origin: content-box;
+  padding: 5px;
+  margin-right: 5px;
+  border-color: 1;
+  border-style: double;
+  border-width: 8px;
+  border-color: darkslateblue;
+}
+
+.quebra-pagina {
+  page-break-after: always;
+}
+
+.borda {
+  border: 1px solid #000000;
+}
+
+.borda-cracha {
+  border-style: double;
+  border-width: 5px;
+  border-color: green;
+}
+
+.cracha-nomes {
+  /* margin-left: 30px;
+  margin-right: 30px; */
+  margin-top: 30%;
+  /* border-radius: 10px; */
+  padding: 10px;
+  width: 50%;
+  /* margin-left: auto; */
+  /* margin-right: auto; */
+}
+
+.cracha-nome-grande {
+  font-size: 22pt;
+  font-weight: bold;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: red;
+  text-align: center;
+}
+
+.cracha-nome-grande .nome {
+  font-size: 36pt;
+  font-family: 'Permanent Marker', cursive;
+  
+/* font-weight: bold;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: red;
+  text-align: center; */
+}
+
+.cracha-nome-grande p {
+  width: 100%;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.cracha-nome-pequeno {
+  font-size: 14pt;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: center;
+}
+
+.cracha-nome-pequeno p {
+  width: 100%;
+  /* text-align: rights; */
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.cor-do-circulo {
+  /* margin-top: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  height: 14px; */
+}
