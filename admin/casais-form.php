@@ -111,151 +111,109 @@ function montar_equipes($equipe) {
 
 ?>
 
-<div class="col-sm-12 col-xl-6">
-    <div class="bg-light rounded h-100 p-4">
-        <h6 class="mb-4">
-            <i class="fa fa-plus-square fa-3x text-primary"></i>
-            Novo casal
-        </h6>
-
-        <form action="
-        <?php 
-            if (isset($id)) {
-                echo "?page=$page&operacao=$operacao&id=$id";
-            } else {
-                echo "?page=$page&operacao=$operacao";
-            }  ?>" method="post">
-            <input type="hidden" name="enviar_form" value="enviar_form">
-
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="ele_nome"
-                    placeholder="Nome Ele:" name="ele_nome" value="<?php echo $casais["ele_nome"]; ?>">
-                <label for="ele_nome">Nome dele:</label>
+<div class="container-fluid pt-4 px-4">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-8 col-xl-6">
+            <div class="bg-light rounded h-100 p-4 shadow-sm">
+                <h6 class="mb-4 d-flex align-items-center gap-2">
+                    <i class="fa fa-user-edit fa-2x text-primary"></i>
+                    <?php echo isset($id) ? 'Editar casal' : 'Novo casal'; ?>
+                </h6>
+                <form action="<?php if (isset($id)) { echo "?page=$page&operacao=$operacao&id=$id"; } else { echo "?page=$page&operacao=$operacao"; } ?>" method="post">
+                    <input type="hidden" name="enviar_form" value="enviar_form">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="ele_nome" placeholder="Nome dele" name="ele_nome" value="<?php echo $casais["ele_nome"]; ?>">
+                                <label for="ele_nome">Nome dele</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="ele_apelido" placeholder="Nome no crachá dele" name="ele_apelido" value="<?php echo $casais["ele_apelido"]; ?>">
+                                <label for="ele_apelido">Nome no crachá dele</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="ela_nome" placeholder="Nome dela" name="ela_nome" value="<?php echo $casais["ela_nome"]; ?>">
+                                <label for="ela_nome">Nome dela</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="ela_apelido" placeholder="Nome no crachá dela" name="ela_apelido" value="<?php echo $casais["ela_apelido"]; ?>">
+                                <label for="ela_apelido">Nome no crachá dela</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="telefone_ele" placeholder="Telefones dele" name="telefone_ele" value="<?php echo $casais["telefone_ele"]; ?>">
+                                <label for="telefone_ele">Telefones dele</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="telefone_ela" placeholder="Telefones dela" name="telefone_ela" value="<?php echo $casais["telefone_ela"]; ?>">
+                                <label for="telefone_ela">Telefones dela</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="endereco" placeholder="Endereço" name="endereco" value="<?php echo $casais["endereco"]; ?>">
+                                <label for="endereco">Endereço</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-check mb-3 <?php if ($page == "encontristas") { echo "d-none"; } ?>">
+                                <input class="form-check-input" type="checkbox" value="1" id="coordenador_circulo" name="coordenador_circulo" <?php if ($casais["coordenador_circulo"] == "1") { echo "checked"; } ?>>
+                                <label class="form-check-label" for="coordenador_circulo">Coordenador de círculo?</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <?php echo montar_circulos($casais["circulo"]); ?>
+                        </div>
+                        <?php if ($page == "equipes") { ?>
+                        <div class="col-12">
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" value="1" id="coordenador_equipe" name="coordenador_equipe" <?php if ($casais["coordenador_equipe"] == "1") { echo "checked"; } ?>>
+                                <label class="form-check-label" for="coordenador_equipe">Coordenador de Equipe de trabalho?</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <?php echo montar_equipes($casais["equipe"]); ?>
+                        </div>
+                        <?php } ?>
+                        <input type="hidden" name="tipo" value="<?php echo ($page == "encontristas") ? "encontrista" : "equipe"; ?>">
+                        <div class="col-12 <?php if ($page == "encontristas") { echo "d-none"; } ?>">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="outras_funcoes" placeholder="Outras funções" name="outras_funcoes" value="<?php echo $casais["outras_funcoes"]; ?>">
+                                <label for="outras_funcoes">Outras funções</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" value="1" id="confirmado" name="confirmado" <?php if ($casais["confirmado"] == "1") { echo "checked"; } ?>>
+                                <label class="form-check-label" for="confirmado">Confirmado?</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating mb-3">
+                                <textarea class="form-control" placeholder="Deixe as observações aqui" id="obs" name="obs" style="height: 120px;"><?php echo $casais["obs"]; ?></textarea>
+                                <label for="obs">Observações</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column flex-md-row gap-2 mt-3">
+                        <button type="submit" class="btn btn-primary flex-fill">
+                            <i class="fa fa-save me-1"></i> Salvar
+                        </button>
+                        <a href="?page=<?php echo $page; ?>" class="btn btn-outline-secondary flex-fill">
+                            <i class="fa fa-times me-1"></i> Cancelar
+                        </a>
+                    </div>
+                </form>
             </div>
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="ele_apelido"
-                    placeholder="Nome no crachá dele:" name="ele_apelido" value="<?php echo $casais["ele_apelido"]; ?>">
-                <label for="ele_apelido">Nome no crachá dele:</label>
-            </div>
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="ela_nome"
-                    placeholder="" name="ela_nome" value="<?php echo $casais["ela_nome"]; ?>">
-                <label for="ela_nome">Nome dela:</label>
-            </div>
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="ela_apelido"
-                    placeholder="" name="ela_apelido" value="<?php echo $casais["ela_apelido"]; ?>">
-                <label for="ela_apelido">Nome no crachá dela:</label>
-            </div>
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="telefone_ele"
-                    placeholder="" name="telefone_ele" value="<?php echo $casais["telefone_ele"]; ?>">
-                <label for="telefone_ele">Telefones dele:</label>
-            </div>
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="telefone_ela"
-                    placeholder="" name="telefone_ela" value="<?php echo $casais["telefone_ela"]; ?>">
-                <label for="telefone_ela">Telefones dela:</label>
-            </div>
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="endereco"
-                    placeholder="" name="endereco" value="<?php echo $casais["endereco"]; ?>">
-                <label for="endereco">Endereço</label>
-            </div>
-        
-            <div class="form-check
-                <?php
-                    if ($page == "encontristas") {
-                        echo " hidden ";
-                    }
-                ?>
-            ">
-                <input class="form-check-input" type="checkbox" value="" id="coordenador_circulo" name="coordenador_circulo"
-                    <?php if ($casais["coordenador_circulo"] == "1") { echo "checked"; } ?>
-                >
-                <label class="form-check-label" for="coordenador_circulo">
-                    Coordenador de círculo?
-                </label>
-            </div>
-
-            <?php
-                echo montar_circulos($casais["circulo"]);
-            ?>
-
-            <?php
-                if ( 
-                        ($page == "equipes")
-                    ) {
-            ?>
-
-            <div class="form-check
-                <?php
-                    if ($page == "encontristas") {
-                        echo " hidden ";
-                    }
-                ?>
-            ">
-                <input class="form-check-input" type="checkbox" value="" id="coordenador_equipe" name="coordenador_equipe"
-                    <?php if ($casais["coordenador_equipe"] == "1") { echo "checked"; } ?>
-                >
-                <label class="form-check-label" for="coordenador_equipe">
-                    Coordenador de Equipe de trabalho?
-                </label>
-            </div>         
-
-            <?php
-                    }
-
-                if ($page == "equipes") {
-                    echo montar_equipes($casais["equipe"]);
-                }  
-            ?>
-
-            <input type="hidden" name="tipo" value="<?php
-                if ($page == "encontristas") {
-                    echo "encontrista";
-                } else {
-                    echo "equipe";
-                }
-                ?>">
-
-            <div class="form-floating mb-3 
-                <?php
-                    if ($page == "encontristas") {
-                            echo "hidden";
-                    }
-                ?>
-            ">
-                <input type="text" class="form-control" id="outras_funcoes"
-                    placeholder="" name="outras_funcoes" value="<?php echo $casais["outras_funcoes"]; ?>">
-                <label for="outras_funcoes">Outras funções</label>
-            </div>
-
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" 
-                    id="confirmado" name="confirmado"
-                    <?php if ($casais["confirmado"] == "1") { echo "checked"; } ?>
-                >
-                <label class="form-check-label" for="confirmado">
-                    Confirmado?
-                </label>
-            </div>                
-
-            <div class="form-floating">
-                <textarea class="form-control" placeholder="Deixe as observacoes aqui"
-                    id="obs" name="obs" style="height: 150px;"><?php echo $casais["obs"]; ?></textarea>
-                <label for="obs">OBS</label>
-            </div>
-
-            <!-- <button class="btn btn-primary w-100 m-2" type="button">Enviar</button> -->
-            <input type="submit" class="btn btn-primary w-100 m-2" value="Enviar">
-
-            <a href="?page=<?php echo $page; ?>">
-                <button class="btn btn-outline-primary w-100 m-2" type="button">
-                    Cancelar
-                </button>
-            </a>
-
-        </form>
+        </div>
     </div>
 </div>

@@ -52,7 +52,7 @@
 <body>
     <div class="container-xxl position-relative bg-white d-flex p-0">
         <!-- Spinner Start -->
-        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+    <div id="spinner" class="bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
             <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
@@ -71,46 +71,39 @@
         <!-- Sidebar End -->
 
         <!-- Content Start -->
-        <div class="content">
-        
-        <?php 
-
-            // Área principal do site
-
-            include_once("menu-topo.php");
-
-            if ( $page == "home" ) {
-                include_once("home.php");
-            } elseif ($page == "encontristas") {
-                include_once("encontristas.php");
-            } elseif ($page == "equipes") {
-                include_once("equipes.php");
-            } elseif ($page == "processar") {
-                include_once("processar.php");
-            } elseif ($page == "pesquisar") {
-                include_once("pesquisa.php");
-            } else {
-                include_once("home.php");
-            }
-        ?>
-
+        <div class="content p-3 p-md-4">
+            <?php include_once("menu-topo.php"); ?>
+            <div class="container-fluid px-0 px-md-3">
+                <?php 
+                    // Área principal do site
+                    if ( $page == "home" ) {
+                        include_once("home.php");
+                    } elseif ($page == "encontristas") {
+                        include_once("encontristas.php");
+                    } elseif ($page == "equipes") {
+                        include_once("equipes.php");
+                    } elseif ($page == "processar") {
+                        include_once("processar.php");
+                    } elseif ($page == "pesquisar") {
+                        include_once("pesquisa.php");
+                    } else {
+                        include_once("home.php");
+                    }
+                ?>
+            </div>
             <!-- Footer Start -->
-            <div class="container-fluid pt-4 px-4">
+            <footer class="container-fluid pt-4 px-4 mt-auto">
                 <div class="bg-light rounded-top p-4">
                     <div class="row">
                         <div class="col-12 col-sm-6 text-center text-sm-start">
                             &copy; <a href="#">1ºECC São Francisco</a>, Arquidiocese de Santarém. 
                         </div>
                         <div class="col-12 col-sm-6 text-center text-sm-end">
-                            <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                            <!-- Designed By <a href="https://htmlcodex.com">HTML Codex</a> -->
                             Adaptadado por Rennan Maia
-                        </br>
-                        <!-- Distributed By <a class="border-bottom" href="https://themewagon.com" target="_blank">ThemeWagon</a> -->
                         </div>
                     </div>
                 </div>
-            </div>
+            </footer>
             <!-- Footer End -->
         </div>
         <!-- Content End -->

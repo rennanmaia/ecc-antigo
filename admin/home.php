@@ -26,52 +26,61 @@ $qtd_circulos = $result->num_rows;
 
 ?>
 
+
 <!-- Barra de ferramentas -->
-            <div class="container-fluid pt-4 px-4">
-                <div class="row g-4">
-                    <div class="col-sm-6 col-xl-3">
-                        <a href="?page=encontristas">
-                            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                                <i class="fa fa-chart-line fa-3x text-primary"></i>
-                                <div class="ms-3">
-                                    <p class="mb-2">Encontristas</p>
-                                    <h6 class="mb-0"><?php echo $qtd_casais_encontristas; ?></h6>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-sm-6 col-xl-3">
-                    <a href="?page=equipes">
-                        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                            <i class="fa fa-chart-bar fa-3x text-primary"></i>
-                            <div class="ms-3">
-                                <p class="mb-2">Equipes</p>
-                                <h6 class="mb-0"><?php echo $qtd_casais_equipes; ?></h6>
-                            </div>
-                        </div>
-</a>
-                    </div>
-                    <div class="col-sm-6 col-xl-3">
-                        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                            <i class="fa fa-chart-area fa-3x text-primary"></i>
-                            <div class="ms-3">
-                                <p class="mb-2">Circulos</p>
-                                <h6 class="mb-0"><?php echo $qtd_circulos; ?></h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-xl-3">
-                        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                            <i class="fa fa-chart-pie fa-3x text-primary"></i>
-                            <div class="ms-3">
-                                <p class="mb-2">???</p>
-                                <h6 class="mb-0">???</h6>
-                            </div>
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-12 col-sm-6 col-xl-3">
+            <a href="?page=encontristas" class="text-decoration-none">
+                <div class="card shadow-sm border-0 h-100">
+                    <div class="card-body d-flex align-items-center justify-content-between">
+                        <i class="fa fa-users fa-3x text-primary"></i>
+                        <div class="ms-3 text-end">
+                            <p class="mb-1 fw-bold text-primary">Encontristas</p>
+                            <h3 class="mb-0 fw-bold"><?php echo $qtd_casais_encontristas; ?></h3>
                         </div>
                     </div>
                 </div>
+            </a>
+        </div>
+        <div class="col-12 col-sm-6 col-xl-3">
+            <a href="?page=equipes" class="text-decoration-none">
+                <div class="card shadow-sm border-0 h-100">
+                    <div class="card-body d-flex align-items-center justify-content-between">
+                        <i class="fa fa-people-carry fa-3x text-success"></i>
+                        <div class="ms-3 text-end">
+                            <p class="mb-1 fw-bold text-success">Equipes</p>
+                            <h3 class="mb-0 fw-bold"><?php echo $qtd_casais_equipes; ?></h3>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-body d-flex align-items-center justify-content-between">
+                    <i class="fa fa-circle fa-3x text-warning"></i>
+                    <div class="ms-3 text-end">
+                        <p class="mb-1 fw-bold text-warning">Círculos</p>
+                        <h3 class="mb-0 fw-bold"><?php echo $qtd_circulos; ?></h3>
+                    </div>
+                </div>
             </div>
-            <!-- Barra de ferramentas FIM -->
+        </div>
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-body d-flex align-items-center justify-content-between">
+                    <i class="fa fa-cogs fa-3x text-secondary"></i>
+                    <div class="ms-3 text-end">
+                        <p class="mb-1 fw-bold text-secondary">Configurações</p>
+                        <a href="config-cartao-form.php" class="btn btn-outline-secondary btn-sm mt-1"><i class="fa fa-cog me-1"></i> Acessar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Barra de ferramentas FIM -->
 
 
             <?php

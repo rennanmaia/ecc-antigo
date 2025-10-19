@@ -1,7 +1,12 @@
-.hidden{
-  display: none;
+
+/* Utilitários customizados para o sistema ECC */
+
+/* Ocultar elemento (preferir Bootstrap: d-none) */
+.hidden {
+  display: none !important;
 }
 
+/* Mensagem centralizada (pouco usada, prefira utilitários Bootstrap) */
 .centered-message {
   margin-left: 10%;
   margin-right: 10%;
@@ -10,12 +15,12 @@
   margin-bottom: 5px;
 }
 
+/* Ícones de confirmação (preferir text-success/text-danger do Bootstrap) */
 .color-checked {
   margin-left: 5px;
-  color: green;
+  color: #198754 !important; /* Bootstrap success */
 }
-
 .color-unchecked {
   margin-left: 5px;
-  color: red;
+  color: #6c757d !important; /* Bootstrap secondary */
 }

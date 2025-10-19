@@ -14,6 +14,12 @@ if (isset($_POST["enviar_form"])) {
   $acao = "form";
 }
 
+if (isset($_GET["operacao"])) {
+    $operacao = $_GET["operacao"];
+} else {
+    $operacao = "";
+}
+
 
 if ($operacao != "") {
   if ( ($operacao == "inserir") && ($acao == "form") ){

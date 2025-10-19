@@ -6,6 +6,12 @@
 
 <?php 
 
+if (isset($_GET["operacao"])) {
+    $operacao = $_GET["operacao"];
+} else {
+    $operacao = "";
+}
+
 // operacao (inserir, editar)
 // acao (form, enviar_dados)
 if (isset($_POST["enviar_form"])) {

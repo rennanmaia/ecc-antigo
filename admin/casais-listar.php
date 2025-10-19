@@ -19,83 +19,20 @@ function circulo_nome($id) {
   }
 }
 
-function circulo_cor($id) {
-  if ($id != "0") {
-    global $connection;
-    $sql = "SELECT * FROM circulos WHERE id = '$id'";
-    $result = mysqli_query($connection, $sql) or die ("erro");
-    $row = $result->fetch_array();
-    $cor = $row["cor_codigo"];
-    return $cor;  
-  }
-}
-
 function equipe_nome($id) {
   if ($id != "0") {
     global $connection;
     $sql = "SELECT * FROM equipes WHERE id = '$id'";
     $result = mysqli_query($connection, $sql) or die ("erro");
     $row = $result->fetch_array();
-    $cor = strtoupper($row["nome"]);
-    return $cor;
-  }
-}
-
-function qtd_casais($tipo){
-  global $connection;
-  global $qtd_casais;
-
-  $campo_circulo_equipe = "";
-  $valor_circulo_equipe = "";
-
-  $sql = "";
-  if ($tipo == "encontristas") {
-    $sql = "SELECT * FROM casais WHERE tipo = 'encontrista' ORDER BY ele_nome";
-    $campo_circulo_equipe = "Circulo";
-  } elseif ($tipo == "equipes") {
-    $sql = "SELECT * FROM casais WHERE tipo = 'equipe' ORDER BY ele_nome";
-    $campo_circulo_equipe = "Equipe";
-  } elseif ($tipo == "pesquisar") {
-    global $termo_controle;
-    global $termo_texto;
-
-    if ($termo_controle == "equipe") {
-      $sql = "SELECT casais.*, equipes.nome FROM `casais`
-        INNER JOIN equipes ON casais.equipe = equipes.id
-        WHERE
-        equipes.nome LIKE '%$termo_texto%'";
-    } elseif ($termo_controle == "circulo") {
-      $sql = "SELECT casais.*, circulos.cor FROM `casais`
-        INNER JOIN circulos ON casais.circulo = circulos.id
-        WHERE
-        circulos.cor LIKE '%$termo_texto%'";
-    } elseif ($termo_controle == "palestra") {
-      echo $sql = "SELECT casais.* FROM `casais`
-        WHERE
-        casais.funcao LIKE '%$termo_texto%' OR
-        casais.obs LIKE '%$termo_texto%'";
+    if ($row !== null) {
+      return strtoupper($row["nome"]);
     } else {
-      $sql = "SELECT * FROM casais WHERE
-        (ele_nome LIKE '%$termo_texto%') ||
-        (ele_apelido LIKE '%$termo_texto%') ||
-        (ela_nome LIKE '%$termo_texto%') ||
-        (ela_apelido LIKE '%$termo_texto%')  
-      ";
+      return "N/A";
     }
-
-    // echo "cont: " . $termo_controle . "<br>";
-    // echo "busc: " . $termo_texto;  
-    $campo_circulo_equipe = "Pesquisa";    
-  } else {
-    $sql = "SELECT * FROM casais ORDER BY ele_nome";
-    $campo_circulo_equipe = "Equipe";
   }
-  
-  $result = mysqli_query($connection, $sql) or die ("erro");
-
-  $qtd_casais = $result->num_rows;
-  return $qtd_casais;
 }
+
 
 
 function listar_casais($tipo) {
@@ -223,62 +160,59 @@ function listar_casais($tipo) {
 <div class="container-fluid pt-4 px-4">
     <div class="row g-4">
         <div class="col-sm-6 col-xl-3">
-          <a href="?page=<?php echo $page; ?>&operacao=inserir">
-            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                <i class="fa fa-plus-square fa-3x text-primary"></i>
+          <a href="?page=<?php echo $page; ?>&operacao=inserir" class="text-decoration-none">
+            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 shadow-sm h-100">
+                <i class="fa fa-plus-square fa-3x text-success"></i>
                 <div class="ms-3">
-                    <p class="mb-2">Novo casal</p>
-                    <!-- <h6 class="mb-0">$1234</h6> -->
+                    <button type="button" class="btn btn-success w-100" data-bs-toggle="tooltip" data-bs-placement="top" title="Adicionar novo casal">
+                        <i class="fa fa-user-plus me-1"></i> Novo casal
+                    </button>
                 </div>
             </div>
           </a>
         </div>
-        <div class="col-sm-6 col-xl-3">
-            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                <i class="fa fa-id-badge fa-3x text-primary"></i>
-                <div class="ms-3">
-                    <!-- <p class="mb-2">Crachá</p> -->
-                    <input type="submit" name="botao_enviar" value="Crachá" class="bg-light"
-                        style="border: 0px;"
-                      >
-                    <!-- <h6 class="mb-0">$1234</h6> -->
-                </div>
-            </div>
+    <div class="col-sm-6 col-xl-3">
+      <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 shadow-sm h-100">
+        <i class="fa fa-id-badge fa-3x text-primary"></i>
+        <div class="ms-3">
+          <button type="submit" name="botao_enviar" value="Crachá" class="btn btn-outline-primary w-100" data-bs-toggle="tooltip" data-bs-placement="top" title="Gerar crachá dos selecionados">
+            <i class="fa fa-id-badge me-1"></i> Crachá
+          </button>
         </div>
+      </div>
+    </div>
 
-        <div class="col-sm-6 col-xl-3">
-            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                <i class="fa fa-id-badge fa-3x text-primary"></i>
-                <div class="ms-3">
-                    <!-- <p class="mb-2">Crachá</p> -->
-                    <input type="submit" name="botao_enviar" value="Mesa" class="bg-light"
-                        style="border: 0px;"
-                      >
-                    <!-- <h6 class="mb-0">$1234</h6> -->
-                </div>
-            </div>
+    <div class="col-sm-6 col-xl-3">
+      <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 shadow-sm h-100">
+        <i class="fa fa-table fa-3x text-warning"></i>
+        <div class="ms-3">
+          <button type="submit" name="botao_enviar" value="Mesa" class="btn btn-outline-warning w-100" data-bs-toggle="tooltip" data-bs-placement="top" title="Gerar crachá de mesa dos selecionados">
+            <i class="fa fa-table me-1"></i> Mesa
+          </button>
         </div>
-        <div class="col-sm-6 col-xl-3">
-            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                <i class="fa fa-th-list fa-3x text-primary"></i>
-                <div class="ms-3">
-                  <input type="submit" name="botao_enviar" value="C.Vela" class="bg-light"
-                      style="border: 0px;"
-                    >
-                </div>
-            </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+      <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 shadow-sm h-100">
+        <i class="fa fa-fire fa-3x text-danger"></i>
+        <div class="ms-3">
+          <button type="submit" name="botao_enviar" value="C.Vela" class="btn btn-outline-danger w-100" data-bs-toggle="tooltip" data-bs-placement="top" title="Gerar cartão Vela dos selecionados">
+            <i class="fa fa-fire me-1"></i> C.Vela
+          </button>
         </div>
+      </div>
+    </div>
 
-        <div class="col-sm-6 col-xl-3">
-            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                <i class="fa fa-th-list fa-3x text-primary"></i>
-                <div class="ms-3">                 
-                    <input type="submit" name="botao_enviar" value="C.Cruz" class="bg-light"
-                      style="border: 0px;"
-                    >
-                </div>
-            </div>
+    <div class="col-sm-6 col-xl-3">
+      <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 shadow-sm h-100">
+        <i class="fa fa-cross fa-3x text-secondary"></i>
+        <div class="ms-3">
+          <button type="submit" name="botao_enviar" value="C.Cruz" class="btn btn-outline-secondary w-100" data-bs-toggle="tooltip" data-bs-placement="top" title="Gerar cartão Cruz dos selecionados">
+            <i class="fa fa-cross me-1"></i> C.Cruz
+          </button>
         </div>
+      </div>
+    </div>
         
         <!-- <div class="col-sm-6 col-xl-3">
             <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
@@ -302,28 +236,35 @@ function listar_casais($tipo) {
 <?php } ?>
 <!-- Barra de ferramentas FIM -->
 
+
 <!-- Listagem de casais início -->
 <div class="container-fluid pt-4 px-4">
   <div class="row g-4">
     <div class="col-12">
-      <div class="bg-light rounded h-100 p-4">
-        <h6 class="mb-4">
-          <?php
-            if ($page == "encontristas") {
-              echo "Casais encontristas";
-            } elseif ($page == "equipes") {
-              echo "Casais de equipes";
-            } else {
-              echo "Todos os casais";
-            }
-          ?>
-        </h6>
-        <div class="table-responsive">
-          <table class="table">
-            <thead>
+      <div class="bg-light rounded h-100 p-4 shadow-sm">
+        <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between mb-3 gap-2">
+          <h6 class="mb-0 fw-bold">
+            <i class="fa fa-users text-primary me-2"></i>
+            <?php
+              if ($page == "encontristas") {
+                echo "Casais encontristas";
+              } elseif ($page == "equipes") {
+                echo "Casais de equipes";
+              } else {
+                echo "Todos os casais";
+              }
+            ?>
+          </h6>
+          <a href="?page=<?php echo $page; ?>&operacao=inserir" class="btn btn-success d-flex align-items-center gap-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Adicionar novo casal">
+            <i class="fa fa-user-plus"></i> Novo casal
+          </a>
+        </div>
+        <div class="table-responsive mt-3">
+          <table class="table table-hover align-middle table-bordered mb-0">
+            <thead class="table-light">
               <tr>
-                <th scope="col">
-                  <input class="form-check-input" type="checkbox" id="checkAll" name="checkAll">
+                <th scope="col" class="text-center" style="width:48px;">
+                  <input class="form-check-input" type="checkbox" id="checkAll" name="checkAll" data-bs-toggle="tooltip" data-bs-placement="top" title="Selecionar todos">
                 </th>
                 <th scope="col">#</th>
                 <th scope="col">Ele</th>
