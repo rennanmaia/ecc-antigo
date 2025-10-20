@@ -53,8 +53,11 @@ function listar_casais($tipo) {
   }
   $result = mysqli_query($connection, $sql) or die ("erro");
 
-  // Tabela para telas grandes
-  $html = '<div class="d-none d-md-block">';
+  // Botão de crachá em massa (telas grandes)
+  $html = '<form method="post" action="">';
+  $html .= '<div class="mb-3 d-none d-md-block">';
+  $html .= '<button type="submit" name="botao_enviar" value="Cracha-Massa" class="btn btn-primary btn-sm" id="btn-cracha-massa" disabled><i class="fa fa-id-badge me-1"></i> Gerar crachás em massa</button>';
+  $html .= '</div>';
   $html .= '<table class="casais-table">';
   $html .= '<thead><tr>';
   $html .= '<th style="width:40px">Sel.</th>';
@@ -85,7 +88,7 @@ function listar_casais($tipo) {
         $valor_circulo_equipe = $equipe;
       }
       $html .= '<tr>';
-      $html .= '<td><input class="form-check-input" type="checkbox" name="check_casal[]" value="'.$id.'" data-bs-toggle="tooltip" title="Selecionar casal"></td>';
+  $html .= '<td><input class="form-check-input casal-checkbox" type="checkbox" name="check_casal[]" value="'.$id.'" data-bs-toggle="tooltip" title="Selecionar casal"></td>';
       $html .= '<td>#'.$id.'</td>';
       $html .= '<td>'.$ele_nome.' <small class="text-muted">'.$ele_apelido.'</small></td>';
       $html .= '<td>'.$ela_nome.' <small class="text-muted">'.$ela_apelido.'</small></td>';
@@ -101,9 +104,13 @@ function listar_casais($tipo) {
       $html .= '</td>';
       $html .= '</tr>';
   }
-  $html .= '</tbody></table></div>';
-  // Cards para telas pequenas
-  $html .= '<div class="row g-3 d-md-none">';
+  $html .= '</tbody></table></form></div>';
+  // Botão de crachá em massa (telas pequenas)
+  $html .= '<form method="post" action="">';
+  $html .= '<div class="mb-3 d-md-none">';
+  $html .= '<button type="submit" name="botao_enviar" value="Cracha-Massa" class="btn btn-primary btn-sm" id="btn-cracha-massa-mobile" disabled><i class="fa fa-id-badge me-1"></i> Gerar crachás em massa</button>';
+  $html .= '</div>';
+  $html .= '<div class="row g-3">';
   $result->data_seek(0); // Reinicia ponteiro do resultado
   while ($row = $result->fetch_array()) {
       $id = $row["id"];
@@ -128,7 +135,7 @@ function listar_casais($tipo) {
       $html .= '<div class="card-body">';
       $html .= '<div class="d-flex align-items-center justify-content-between mb-2">';
       $html .= '<div class="d-flex align-items-center gap-2">';
-      $html .= '<input class="form-check-input" type="checkbox" name="check_casal[]" value="'.$id.'" data-bs-toggle="tooltip" title="Selecionar casal">';
+      $html .= '<input class="form-check-input casal-checkbox-mobile" type="checkbox" name="check_casal[]" value="'.$id.'" data-bs-toggle="tooltip" title="Selecionar casal">';
       if ($confirmado == 1) {
         $html .= '<i class="fas fa-check-circle text-success ms-1" data-bs-toggle="tooltip" title="Confirmado"></i>';
       } else {
@@ -151,7 +158,7 @@ function listar_casais($tipo) {
       $html .= '</div>';
       $html .= '</div></div></div>';
   }
-  $html .= '</div>';
+  $html .= '</div></form>';
   return $html;
 }
 

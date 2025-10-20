@@ -1,3 +1,12 @@
+/* Habilita botão de crachá em massa quando há seleção */
+#btn-cracha-massa:enabled, #btn-cracha-massa-mobile:enabled {
+  opacity: 1;
+  cursor: pointer;
+}
+#btn-cracha-massa:disabled, #btn-cracha-massa-mobile:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 /* Tabela de casais responsiva para telas grandes */
 @media (min-width: 800px) {
   .casais-table {

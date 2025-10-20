@@ -1,3 +1,22 @@
+// Habilita botão de crachá em massa quando há seleção de casais
+document.addEventListener('DOMContentLoaded', function() {
+    function toggleMassButton(selector, btnSelector) {
+        const checkboxes = document.querySelectorAll(selector);
+        const btn = document.querySelector(btnSelector);
+        if (!btn) return;
+        function updateBtn() {
+            let checked = 0;
+            checkboxes.forEach(cb => { if (cb.checked) checked++; });
+            btn.disabled = checked === 0;
+        }
+        checkboxes.forEach(cb => {
+            cb.addEventListener('change', updateBtn);
+        });
+        updateBtn();
+    }
+    toggleMassButton('.casal-checkbox', '#btn-cracha-massa');
+    toggleMassButton('.casal-checkbox-mobile', '#btn-cracha-massa-mobile');
+});
 (function ($) {
     "use strict";
 
