@@ -1,3 +1,30 @@
+/* Tabela de casais responsiva para telas grandes */
+@media (min-width: 800px) {
+  .casais-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    margin-top: 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .casais-table th, .casais-table td {
+    padding: 10px 8px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+  }
+  .casais-table th {
+    background: #f8f9fa;
+    font-weight: bold;
+    color: #009cff;
+    border-bottom: 2px solid #009cff;
+  }
+  .casais-table tr:last-child td {
+    border-bottom: none;
+  }
+}
 /* Cards em formato de tabela para telas grandes */
 @media (min-width: 800px) {
   .casais-table-row {

@@ -53,18 +53,19 @@ function listar_casais($tipo) {
   }
   $result = mysqli_query($connection, $sql) or die ("erro");
 
-  // Cabeçalho estilo tabela para telas grandes
-  $html = '<div class="casais-table-header d-none d-md-flex">';
-  $html .= '<div>Selecionar</div>';
-  $html .= '<div>ID</div>';
-  $html .= '<div>Encontrista</div>';
-  $html .= '<div>Encontrista</div>';
-  $html .= '<div>Endereço</div>';
-  $html .= '<div>Telefone</div>';
-  $html .= '<div>Circulo/Equipe</div>';
-  $html .= '<div>Ações</div>';
-  $html .= '</div>';
-  $html .= '<div class="row g-3">';
+  // Tabela para telas grandes
+  $html = '<div class="d-none d-md-block">';
+  $html .= '<table class="casais-table">';
+  $html .= '<thead><tr>';
+  $html .= '<th style="width:40px">Sel.</th>';
+  $html .= '<th style="width:60px">ID</th>';
+  $html .= '<th>Encontrista</th>';
+  $html .= '<th>Encontrista</th>';
+  $html .= '<th>Endereço</th>';
+  $html .= '<th>Telefone</th>';
+  $html .= '<th>Circulo/Equipe</th>';
+  $html .= '<th style="width:180px">Ações</th>';
+  $html .= '</tr></thead><tbody>';
   while ($row = $result->fetch_array()) {
       $id = $row["id"];
       $ele_nome = strtoupper($row["ele_nome"]);
@@ -83,28 +84,46 @@ function listar_casais($tipo) {
       } else {
         $valor_circulo_equipe = $equipe;
       }
-      // Card em formato de linha para telas grandes
-      $html .= '<div class="col-12 casais-table-row d-none d-md-flex">';
-      $html .= '<div class="card">';
-      $html .= '<div class="card-body py-2 px-1 d-flex align-items-center">';
-      $html .= '<input class="form-check-input me-2" type="checkbox" name="check_casal[]" value="'.$id.'" data-bs-toggle="tooltip" title="Selecionar casal">';
-      $html .= '</div></div>';
-      $html .= '<div class="card"><div class="card-body py-2 px-1">#'.$id.'</div></div>';
-      $html .= '<div class="card"><div class="card-body py-2 px-1">'.$ele_nome.' <small class="text-muted">'.$ele_apelido.'</small></div></div>';
-      $html .= '<div class="card"><div class="card-body py-2 px-1">'.$ela_nome.' <small class="text-muted">'.$ela_apelido.'</small></div></div>';
-      $html .= '<div class="card"><div class="card-body py-2 px-1">'.$endereco.'</div></div>';
-      $html .= '<div class="card"><div class="card-body py-2 px-1"><span class="text-muted">'.$telefone_ele.'</span> | <span class="text-muted">'.$telefone_ela.'</span></div></div>';
-      $html .= '<div class="card"><div class="card-body py-2 px-1">'.$valor_circulo_equipe.'</div></div>';
-      $html .= '<div class="card"><div class="card-body py-2 px-1 d-flex gap-2">';
+      $html .= '<tr>';
+      $html .= '<td><input class="form-check-input" type="checkbox" name="check_casal[]" value="'.$id.'" data-bs-toggle="tooltip" title="Selecionar casal"></td>';
+      $html .= '<td>#'.$id.'</td>';
+      $html .= '<td>'.$ele_nome.' <small class="text-muted">'.$ele_apelido.'</small></td>';
+      $html .= '<td>'.$ela_nome.' <small class="text-muted">'.$ela_apelido.'</small></td>';
+      $html .= '<td>'.$endereco.'</td>';
+      $html .= '<td><span class="text-muted">'.$telefone_ele.'</span> | <span class="text-muted">'.$telefone_ela.'</span></td>';
+      $html .= '<td>'.$valor_circulo_equipe.'</td>';
+      $html .= '<td class="d-flex gap-2">';
       $html .= '<a href="?page='.$tipo_casal.'&operacao=editar&id='.$id.'" class="btn btn-sm btn-outline-primary" data-bs-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i></a>';
       $html .= '<button type="submit" name="botao_enviar" value="Crachá-'.$id.'" class="btn btn-sm btn-outline-success" data-bs-toggle="tooltip" title="Gerar crachá"><i class="fa fa-id-badge"></i></button>';
       $html .= '<button type="submit" name="botao_enviar" value="Mesa-'.$id.'" class="btn btn-sm btn-outline-warning" data-bs-toggle="tooltip" title="Gerar crachá de mesa"><i class="fa fa-table"></i></button>';
       $html .= '<button type="submit" name="botao_enviar" value="C.Vela-'.$id.'" class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip" title="Gerar cartão Vela"><i class="fa fa-fire"></i></button>';
       $html .= '<button type="submit" name="botao_enviar" value="C.Cruz-'.$id.'" class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="Gerar cartão Cruz"><i class="fa fa-cross"></i></button>';
-      $html .= '</div></div>';
-      $html .= '</div>';
-      // Card tradicional para telas pequenas
-      $html .= '<div class="col-12 col-md-6 col-xl-4 d-md-none">';
+      $html .= '</td>';
+      $html .= '</tr>';
+  }
+  $html .= '</tbody></table></div>';
+  // Cards para telas pequenas
+  $html .= '<div class="row g-3 d-md-none">';
+  $result->data_seek(0); // Reinicia ponteiro do resultado
+  while ($row = $result->fetch_array()) {
+      $id = $row["id"];
+      $ele_nome = strtoupper($row["ele_nome"]);
+      $ele_apelido = strtoupper($row["ele_apelido"]);
+      $ela_nome = strtoupper($row["ela_nome"]);
+      $ela_apelido = strtoupper($row["ela_apelido"]);
+      $telefone_ele = $row["telefone_ele"];
+      $telefone_ela = $row["telefone_ela"];
+      $endereco = strtoupper($row["endereco"]);
+      $circulo = circulo_nome($row["circulo"]);
+      $equipe = equipe_nome($row["equipe"]);
+      $confirmado = $row["confirmado"];
+      $tipo_casal = $row["tipo"] . "s";
+      if ($tipo_casal == "encontristas") {
+        $valor_circulo_equipe = $circulo;
+      } else {
+        $valor_circulo_equipe = $equipe;
+      }
+      $html .= '<div class="col-12 col-md-6 col-xl-4">';
       $html .= '<div class="card shadow-sm h-100">';
       $html .= '<div class="card-body">';
       $html .= '<div class="d-flex align-items-center justify-content-between mb-2">';
