@@ -33,8 +33,10 @@ if ($operacao != "") {
     include_once("casais-enviar.php");
     include_once("casais-listar.php");
   }
+
 } else {
   include_once("casais-listar.php");
+  echo listar_casais('encontristas');
 }
 
 

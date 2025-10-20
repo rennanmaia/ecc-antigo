@@ -85,4 +85,5 @@ $qtd_circulos = $result->num_rows;
 
             <?php
                 include_once("casais-listar.php");
+                echo listar_casais('todos');
             ?>      
